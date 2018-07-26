@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.imooc.dao.StudentDao">
+	<select id="selectById" resultType="Student">
+		select id,name,subject,score from student where id=#{_parameter}
+	</select>
+	
+	<insert id="insert">
+		insert into student(name,subject,score)
+		values(#{name},#{subject},#{score})
+	</insert>
+	
+	<select id="modify" >
+        update student
+		<set>
+			<if test="name != null">
+				name = #{name},
+			</if>
+			<if test="subject != null">
+				subject = #{subject},
+			</if>
+			<if test="score != score">
+				score = #{score},
+			</if>
+		</set>
+		where id=#{id}
+	</select>
+	
+
+	
+	<delete id="remove">
+		delete from student where id=#{_parameter}
+	</delete>
+</mapper>

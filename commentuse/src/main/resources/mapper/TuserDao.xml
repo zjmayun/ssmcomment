@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.imooc.dao.TuserDao">
+	<resultMap id="TuserResultMap" type="Tuser">
+		<id property="id" column="user_id" />
+		<result property="name" column="user_name" />
+		<result property="password" column="user_password" />	
+		<result property="email" column="user_email" />
+	</resultMap>
+
+	<select id="getAll" resultMap="TuserResultMap">
+		select user_id,user_name,user_password,user_email from t_user order by user_id asc
+	</select>
+
+
+
+</mapper>
