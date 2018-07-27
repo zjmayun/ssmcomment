@@ -1,13 +1,24 @@
 package org.imooc.service;
 
+import java.util.List;
+
 import org.imooc.bean.Student;
 
 public interface StudentService {
-	int insert(Student student);
+	boolean insert(Student student);
 
-	int remove(int id);
+	boolean remove(int id);
 
-	int modify(Student student);
+	boolean modify(Student student);
 
 	Student selectById(int id);
+	
+    List<Student> getAll();
+	
+	List<Student> selectByPage(Student student);
+	
+	List<Student> selectMaxBySubject();
+	
+	List<Student> selectAvgBySubject();
+	
 }

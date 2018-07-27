@@ -5,8 +5,22 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="org.imooc.dao.StudentDao">
-	<select id="selectById" resultType="Student">
+    <resultMap type="Student" id="selectStudent">
+       <result column="subject" property="subject"/>
+       <result column="score" property="score"/>    
+    </resultMap>
+
+
+	<select id="selectById" parameterType="int" resultType="Student">
 		select id,name,subject,score from student where id=#{_parameter}
+	</select>
+	
+	<select id="selectByPage"  resultType="Student">
+		select id,name,subject,score from student where name like '%' #{name} '%'
+	</select>
+	
+	<select id="getAll"  resultType="Student">
+		select id,name,subject,score from student 
 	</select>
 	
 	<insert id="insert">
@@ -14,7 +28,7 @@
 		values(#{name},#{subject},#{score})
 	</insert>
 	
-	<select id="modify" >
+	<update id="modify" >
         update student
 		<set>
 			<if test="name != null">
@@ -23,14 +37,20 @@
 			<if test="subject != null">
 				subject = #{subject},
 			</if>
-			<if test="score != score">
+			<if test="score != null">
 				score = #{score},
 			</if>
 		</set>
 		where id=#{id}
-	</select>
+	</update>
 	
+	<select id="selectByMaxSubject" resultMap="selectStudent">
+	   select subject,max(score) as score from student group by subject
+	</select>
 
+    <select id="selectByAverage" resultMap="selectStudent">
+	   select subject,avg(score) as score from student group by subject
+	</select>
 	
 	<delete id="remove">
 		delete from student where id=#{_parameter}

@@ -1,10 +1,14 @@
 package org.imooc.bean;
 
-public class Student {
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
+@JsonInclude(Include.NON_NULL)
+public class Student extends BaseBean {
 	private int id;
 	private String name;
 	private String subject;
-	private int score;
+	private long score;
 
 	public int getId() {
 		return id;
@@ -30,13 +34,20 @@ public class Student {
 		this.subject = subject;
 	}
 
-	public int getScore() {
+	public long getScore() {
 		return score;
 	}
 
-	public void setScore(int score) {
+	public void setScore(long score) {
 		this.score = score;
 	}
+
+	@Override
+	public String toString() {
+		return "Student [id=" + id + ", name=" + name + ", subject=" + subject + ", score=" + score + "]";
+	}
+	
+	
      
      
 }

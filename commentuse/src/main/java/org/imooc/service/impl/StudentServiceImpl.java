@@ -1,5 +1,7 @@
 package org.imooc.service.impl;
 
+import java.util.List;
+
 import org.imooc.bean.Student;
 import org.imooc.dao.StudentDao;
 import org.imooc.service.StudentService;
@@ -13,27 +15,46 @@ public class StudentServiceImpl implements StudentService{
 	private StudentDao studentDao;
 	
 	@Override
-	public int insert(Student student) {
-		studentDao.insert(student);
-		return 0;
+	public boolean insert(Student student) {
+		return studentDao.insert(student)==1;
 	}
 
 	@Override
-	public int remove(int id) {
-		// TODO Auto-generated method stub
-		return 0;
+	public boolean remove(int id) {
+		return studentDao.remove(id)==1;
 	}
 
 	@Override
-	public int modify(Student student) {
-		// TODO Auto-generated method stub
-		return 0;
+	public boolean modify(Student student) {
+		return studentDao.modify(student)==1;
 	}
 
 	@Override
 	public Student selectById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		return studentDao.selectById(id);
 	}
+	
+	public List<Student> getAll(){
+		return studentDao.getAll();
+	}
+
+	@Override
+	public List<Student> selectByPage(Student student) {
+		return studentDao.selectByPage(student);
+	}
+
+	@Override
+	public List<Student> selectMaxBySubject() {
+		List<Student> list=studentDao.selectByMaxSubject();
+		return list;
+	}
+
+	@Override
+	public List<Student> selectAvgBySubject() {
+		return studentDao.selectByAverage();
+	}
+
+	
+	
 
 }

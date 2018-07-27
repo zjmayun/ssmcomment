@@ -14,7 +14,7 @@
 	<mvc:default-servlet-handler/>
 	<mvc:interceptors>
 		<mvc:interceptor>
-			<mvc:mapping path="/**"/>
+			<mvc:mapping path="/*"/>
 			<mvc:exclude-mapping path="/login/**"/>
 			<mvc:exclude-mapping path="/css/**"/>
 			<mvc:exclude-mapping path="/js/**"/>
@@ -30,7 +30,7 @@
 		
 		
 		<mvc:interceptor>
-			<mvc:mapping path="/**"/>
+			<mvc:mapping path="/*"/>
 			<mvc:exclude-mapping path="/index"/>
 			<mvc:exclude-mapping path="/session"/>
 			<mvc:exclude-mapping path="/session/menus"/>

@@ -14,4 +14,12 @@ public interface StudentDao {
     
     Student selectById(int id);
     
+    List<Student> getAll();
+    
+    List<Student> selectByPage(Student student);
+    
+    List<Student> selectByMaxSubject();
+    
+    List<Student> selectByAverage();
+    
 }
