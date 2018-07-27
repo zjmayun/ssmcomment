@@ -15,8 +15,13 @@
 		select id,name,subject,score from student where id=#{_parameter}
 	</select>
 	
-	<select id="selectByPage"  resultType="Student">
-		select id,name,subject,score from student where name like '%' #{name} '%'
+	<select id="selectByPage" parameterType="String" resultType="Student">
+		select id,name,subject,score from student
+		<where>
+			<if test="name != null and name != ''">
+				name like '%' #{_parameter} '%'
+			</if>
+		</where>
 	</select>
 	
 	<select id="getAll"  resultType="Student">
@@ -55,4 +60,12 @@
 	<delete id="remove">
 		delete from student where id=#{_parameter}
 	</delete>
+	
+	<delete id="deleteBatch" parameterType="int">
+	    delete from student where id in
+	    <foreach item="studentIn" collection="list" open="(" separator="," close=")">
+	       #{studentIn}
+	    </foreach>
+	</delete>
+	
 </mapper>

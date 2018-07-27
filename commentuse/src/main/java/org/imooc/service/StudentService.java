@@ -21,4 +21,6 @@ public interface StudentService {
 	
 	List<Student> selectAvgBySubject();
 	
+	int deleteBatch(String ids);
+	
 }

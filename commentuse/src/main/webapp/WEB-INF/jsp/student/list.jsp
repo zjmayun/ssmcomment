@@ -83,7 +83,7 @@
 			</div>
 		</form>
 		
-		<input class="tabSub" value="特定查询" onclick="location.href='${basePath}/student/queryMaxAndAvg'" type="button"/>
+		<input class="tabSub" value="max/avg" onclick="location.href='${basePath}/student/queryMaxAndAvg'" type="button"/>
 		<table class="tab2" width="100%">
 							<tbody>
 								<tr>
@@ -118,9 +118,8 @@
 				   temp=temp+","+each;
 			   }
 		   }
-		   alert("hello");
 		   document.getElementById("subString").value=temp.substring(1,temp.length);
-		   $("#mainForm").attr("action",$("#basePath").val() + "/ad/removeBatch");
+		   $("#mainForm").attr("action",$("#basePath").val() + "/student/removeBatch");
 		   $("#mainForm").submit();
 	}
 	 	   

@@ -22,4 +22,6 @@ public interface StudentDao {
     
     List<Student> selectByAverage();
     
+    int deleteBatch(List ids);
+    
 }

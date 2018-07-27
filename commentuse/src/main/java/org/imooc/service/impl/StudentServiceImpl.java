@@ -1,5 +1,6 @@
 package org.imooc.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.imooc.bean.Student;
@@ -53,7 +54,19 @@ public class StudentServiceImpl implements StudentService{
 	public List<Student> selectAvgBySubject() {
 		return studentDao.selectByAverage();
 	}
-
+ 
+	@Override
+	public int deleteBatch(String ids) {
+		if(ids==null&&ids.length()==0) {
+			return 0;
+		}
+		String []idArray=ids.split(",");
+		List list=new ArrayList();
+		for(int i=0;i<idArray.length;i++) {
+			list.add(idArray[i]);
+		}
+		return studentDao.deleteBatch(list);
+	}
 	
 	
 

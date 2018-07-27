@@ -1,5 +1,7 @@
 package org.imooc.controller.content;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.imooc.bean.Student;
@@ -26,7 +28,10 @@ public class StudentController {
 	 
      @RequestMapping
 	 public String init(Model model,HttpServletRequest request) {
+//    	 Student student=new Student();
 	   	 model.addAttribute("studentList",studentService.getAll());
+//	   	 List<Student> list=studentService.selectByPage(student);
+//	   	 model.addAttribute("searchParam",list);
 		 return "/student/list";
 	 }
      
@@ -83,7 +88,18 @@ public class StudentController {
 		 return "forward:/student/";
 	 }
 	
-	 
+	/**
+	 * 删除
+	 */
+	@RequestMapping("/removeBatch")
+	public String removeBatch(@RequestParam("subString") String ids, Model model) {
+		if (studentService.deleteBatch(ids) != 0) {
+			model.addAttribute(PageCodeEnum.KEY, PageCodeEnum.REMOVE_SUCCESS);
+		} else {
+			model.addAttribute(PageCodeEnum.KEY, PageCodeEnum.REMOVE_FAIL);
+		}
+		return "forward:/student/";
+	}
 	 
 	 
 	 
