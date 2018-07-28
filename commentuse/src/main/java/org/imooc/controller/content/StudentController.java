@@ -32,6 +32,7 @@ public class StudentController {
 	   	 model.addAttribute("studentList",studentService.getAll());
 //	   	 List<Student> list=studentService.selectByPage(student);
 //	   	 model.addAttribute("searchParam",list);
+	   	 System.out.println("ºÃ·³°¡");
 		 return "/student/list";
 	 }
      
