@@ -17,12 +17,11 @@ public class TuserServiceImpl implements TuserService{
 	@Autowired
 	private TuserDao tuserDao;
 	
-	@Override
 	public PageInfo<Tuser> getAll(int currentPage,int pageSize) {
 		System.out.println("hello moto");
 		PageHelper.startPage(currentPage, pageSize);
 		List<Tuser> docs=tuserDao.getAll();
-		PageInfo<Tuser> pageInfo=new PageInfo<>(docs);
+		PageInfo<Tuser> pageInfo=new PageInfo<Tuser>(docs);
 		return pageInfo;
 	}
 

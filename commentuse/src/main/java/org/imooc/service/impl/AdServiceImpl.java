@@ -28,7 +28,7 @@ public class AdServiceImpl implements AdService {
 	private String adImageUrl;
 
 	
-	// TODO 可以改成获取失败详细原因
+	// TODO 鍙互鏀规垚鑾峰彇澶辫触璇︾粏鍘熷洜
 	public boolean add(AdDto adDto) {
 		Ad ad = new Ad();
 		ad.setTitle(adDto.getTitle());
@@ -88,7 +88,7 @@ public class AdServiceImpl implements AdService {
 				fileName = FileUtil.save(adDto.getImgFile(), adImageSavePath);
 				ad.setImgFileName(fileName);
 			} catch (IOException e) {
-				// TODO 需要添加日志
+				// TODO 闇�瑕佹坊鍔犳棩蹇�
 				return false;
 			}
 		}
@@ -109,7 +109,6 @@ public class AdServiceImpl implements AdService {
 		return deleteRows == 1;
 	}
 
-	@Override
 	public int deleteBatch(String ids) {
 		if(ids==null&&ids.length()==0) {
 			return 0;

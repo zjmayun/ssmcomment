@@ -28,19 +28,20 @@ public class StudentController {
 	 
      @RequestMapping
 	 public String init(Model model,HttpServletRequest request) {
-//    	 Student student=new Student();
-	   	 model.addAttribute("studentList",studentService.getAll());
-//	   	 List<Student> list=studentService.selectByPage(student);
-//	   	 model.addAttribute("searchParam",list);
-	   	 System.out.println("ºÃ·³°¡");
+    	 Student student=new Student();
+	   	 model.addAttribute("studentList",studentService.selectByPage(student));
+	   	 model.addAttribute("searchParam",student);
 		 return "/student/list";
 	 }
      
      @RequestMapping(value="/query")
-	 public String list(Model model,@RequestParam(value="name")String name) {
+	 public String list(Model model,@RequestParam(value="currentPage")int id,
+			 @RequestParam(value="name")String name) {
     	 Student s=new Student();
+    	 s.getPage().setCurrentPage(id);
     	 s.setName(name);
 	   	 model.addAttribute("studentList",studentService.selectByPage(s));
+	   	 model.addAttribute("searchParam",s);
 		 return "/student/list";
 	 }
      

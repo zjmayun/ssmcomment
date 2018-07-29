@@ -38,7 +38,12 @@ public class BusinessesController {
 	 * 删除商户
 	 */
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-	public String remove(@PathVariable("id") Long id) {
+	public String remove(@PathVariable("id") Long id,Model model) {
+		if(businessService.deletById(id)==1) {
+			model.addAttribute(PageCodeEnum.KEY, PageCodeEnum.REMOVE_SUCCESS);
+		}else {
+			model.addAttribute(PageCodeEnum.KEY,PageCodeEnum.REMOVE_FAIL);
+		}
 		return "redirect:/businesses";
 	}
 
@@ -81,8 +86,12 @@ public class BusinessesController {
 	 * 商户修改
 	 */
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-	public String modify(@PathVariable("id") Long id, BusinessDto dto) {
-		System.out.println(id);
-		return "/content/businessModify";
+	public String modify(@PathVariable("id") Long id, BusinessDto dto,Model model) {
+		if(businessService.modify(dto)==1) {
+			model.addAttribute(PageCodeEnum.KEY, PageCodeEnum.MODIFY_SUCCESS);
+		}else {
+			model.addAttribute(PageCodeEnum.KEY,PageCodeEnum.MODIFY_FAIL);
+		}
+		return "redirect:/businesses";
 	}
 }

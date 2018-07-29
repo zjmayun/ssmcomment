@@ -130,4 +130,38 @@ public class BusinessServiceImpl implements BusinessService {
 			return 0;
 		}
 	}
+
+	public int deletById(Long id) {
+		int i=businessDao.deleteById(id);
+		return i;
+	}
+
+	public int modify(BusinessDto businessDto) {
+		Business business=new Business();
+		BeanUtils.copyProperties(businessDto, business);
+		int i=businessDao.update(business);
+		return i;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

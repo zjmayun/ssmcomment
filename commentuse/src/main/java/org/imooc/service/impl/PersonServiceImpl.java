@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
-import javax.security.auth.message.callback.PrivateKeyCallback.Request;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 
@@ -26,7 +25,6 @@ public class PersonServiceImpl implements PersonService{
 	private PersonDao personDao;
 	
 
-	@Override
 	public boolean add(Person person, MultipartFile file,HttpServletRequest request) {
 		if(file.getSize()>0&&file!=null) {
 			String originalName=file.getOriginalFilename();
@@ -52,7 +50,6 @@ public class PersonServiceImpl implements PersonService{
 	}
 
 
-	@Override
 	public List<Person> getAll() {
 		return personDao.getAll();
 	}

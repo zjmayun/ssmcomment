@@ -22,15 +22,15 @@
 			<input type="hidden" id="subString" name="subString"/>
 			<input type="hidden" id="message" value="${pageCode.msg}"/>
 			<input type="hidden" id="basePath" value="${basePath}"/>
-			<input type="hidden" name="page.currentPage" id="currentPage" value="1"/>
+			<input type="hidden" name="currentPage" id="currentPage" value="1"/>
 			<div class="right">
 				<div class="current">当前位置：<a href="#">内容管理</a> &gt; 广告管理</div>
 				<div class="rightCont">
-					<p class="g_title fix">广告列表</p>
+					<p class="g_title fix">学生模块列表</p>
 					<table class="tab1">
 						<tbody>
 							<tr>
-								<td align="right" width="80">标题：</td>
+								<td align="right" width="80">姓名：</td>
 								<td>
 									<input name="name" id="name" value="" class="allInput" type="text"/>
 								</td>
@@ -89,7 +89,7 @@
 								<tr>
 								    <th>subject</th>
 								    <th>MaxScore</th>
-								    <th>MinScore</th>
+								    <th>AvgScore</th>
 								</tr>
 								<c:forEach items="${maxSubject}" var="item" varStatus="s">
 									<tr>
