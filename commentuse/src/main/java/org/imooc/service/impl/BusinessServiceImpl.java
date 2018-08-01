@@ -42,60 +42,30 @@ public class BusinessServiceImpl implements BusinessService {
 		return result;
 	}
 
-	public List<BusinessDto> searchByPage(BusinessDto businessDto) {
-		List<BusinessDto> result = new ArrayList<BusinessDto>();
-		Business businessForSelect = new Business();
-		BeanUtils.copyProperties(businessDto, businessForSelect);
-		List<Business> list = businessDao.selectByPage(businessForSelect);
-		for (Business business : list) {
-			BusinessDto businessDtoTemp = new BusinessDto();
-			result.add(businessDtoTemp);
-			BeanUtils.copyProperties(business, businessDtoTemp);
-			businessDtoTemp.setImg(url + business.getImgFileName());
-			businessDtoTemp.setStar(this.getStar(business));
-		}
-		return result;
-	}
+	
 
 	public BusinessListDto searchByPageForApi(BusinessDto businessDto) {
-		BusinessListDto result = new BusinessListDto();
-
-		// 组织查询条件
-		Business businessForSelect = new Business();
-		BeanUtils.copyProperties(businessDto, businessForSelect);
-		// 当关键字不为空时，把关键字的值分别设置到标题、副标题、描述中
-		// TODO 改进做法：全文检索
-		if (!CommonUtil.isEmpty(businessDto.getKeyword())) {
-			businessForSelect.setTitle(businessDto.getKeyword());
-			businessForSelect.setSubtitle(businessDto.getKeyword());
-			businessForSelect.setDesc(businessDto.getKeyword());
+		BusinessListDto businessListDto=new BusinessListDto();
+		Business business=new Business();
+		BeanUtils.copyProperties(businessDto, business);
+		List<BusinessDto> listDto=new ArrayList<BusinessDto>();
+		List<Business> list=businessDao.selectLikeByPage(business);
+		for(int i=0;i<list.size();i++) {
+			BusinessDto b=new BusinessDto();
+			Business bus=list.get(i);
+			BeanUtils.copyProperties(bus, b);
+			b.setImg(url+b.getImgFileName());
+			b.setMumber(0);
+			b.setStar(0);
+			listDto.add(b);
 		}
-		// 当类别为全部(all)时，需要将类别清空，不作为过滤条件
-		if (businessDto.getCategory() != null && CategoryConst.ALL.equals(businessDto.getCategory())) {
-			businessForSelect.setCategory(null);
+		if(listDto.size()>0) {
+			businessListDto.setHasMore(true);
+		}else {
+			businessListDto.setHasMore(false);
 		}
-		// 前端app页码从0开始计算，这里需要+1
-		int currentPage = businessForSelect.getPage().getCurrentPage();
-		businessForSelect.getPage().setCurrentPage(currentPage + 1);
-
-		List<Business> list = businessDao.selectLikeByPage(businessForSelect);
-
-		// 经过查询后根据page对象设置hasMore
-		Page page = businessForSelect.getPage();
-		result.setHasMore(page.getCurrentPage() < page.getTotalPage());
-
-		// 对查询出的结果进行格式化
-		for (Business business : list) {
-			BusinessDto businessDtoTemp = new BusinessDto();
-			result.getData().add(businessDtoTemp);
-			BeanUtils.copyProperties(business, businessDtoTemp);
-			businessDtoTemp.setImg(url + business.getImgFileName());
-			// 为兼容前端mumber这个属性
-			businessDtoTemp.setMumber(business.getNumber());
-			businessDtoTemp.setStar(this.getStar(business));
-		}
-
-		return result;
+		businessListDto.setData(listDto);
+		return businessListDto;
 	}
 
 	public boolean add(BusinessDto businessDto) {
@@ -130,4 +100,45 @@ public class BusinessServiceImpl implements BusinessService {
 			return 0;
 		}
 	}
+
+	public int deletById(Long id) {
+		int i=businessDao.deleteById(id);
+		return i;
+	}
+
+	public int modify(BusinessDto businessDto) {
+		Business business=new Business();
+		BeanUtils.copyProperties(businessDto, business);
+		int i=businessDao.update(business);
+		return i;
+	}
+
+
+
+	public List<Business> searchByPage(Business business) {
+		List<Business> list=businessDao.selectByPage(business);
+		return list;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

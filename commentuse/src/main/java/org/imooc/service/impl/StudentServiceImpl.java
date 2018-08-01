@@ -15,22 +15,18 @@ public class StudentServiceImpl implements StudentService{
 	@Autowired
 	private StudentDao studentDao;
 	
-	@Override
 	public boolean insert(Student student) {
 		return studentDao.insert(student)==1;
 	}
 
-	@Override
 	public boolean remove(int id) {
 		return studentDao.remove(id)==1;
 	}
 
-	@Override
 	public boolean modify(Student student) {
 		return studentDao.modify(student)==1;
 	}
 
-	@Override
 	public Student selectById(int id) {
 		return studentDao.selectById(id);
 	}
@@ -39,23 +35,19 @@ public class StudentServiceImpl implements StudentService{
 		return studentDao.getAll();
 	}
 
-	@Override
 	public List<Student> selectByPage(Student student) {
 		return studentDao.selectByPage(student);
 	}
 
-	@Override
 	public List<Student> selectMaxBySubject() {
 		List<Student> list=studentDao.selectByMaxSubject();
 		return list;
 	}
 
-	@Override
 	public List<Student> selectAvgBySubject() {
 		return studentDao.selectByAverage();
 	}
  
-	@Override
 	public int deleteBatch(String ids) {
 		if(ids==null&&ids.length()==0) {
 			return 0;

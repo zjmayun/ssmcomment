@@ -1,7 +1,10 @@
 package org.imooc.controller.content;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
+import org.imooc.bean.Business;
 import org.imooc.constant.DicTypeConst;
 import org.imooc.constant.PageCodeEnum;
 import org.imooc.dto.BusinessDto;
@@ -12,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
@@ -24,21 +28,38 @@ public class BusinessesController {
 	@Resource
 	private BusinessService businessService;
 
-	/**
-	 * 商户列表
-	 */
-	@RequestMapping(method = RequestMethod.GET)
-	public String search(Model model, BusinessDto dto) {
-		model.addAttribute("list", businessService.searchByPage(dto));
-		model.addAttribute("searchParam", dto);
+	
+	@RequestMapping
+	public String list(Model model,Business business) {
+		List<Business> list=businessService.searchByPage(business);
+		model.addAttribute("list", list);
+		model.addAttribute("searchParam",business);
 		return "/content/businessList";
 	}
+	
+	@RequestMapping(value="/search")
+	public String search(Model model,@RequestParam(value="currentPage")int id,
+			@RequestParam(value="title")String title) {
+		Business business=new Business();
+		business.getPage().setCurrentPage(id);
+		business.setTitle(title);
+		List<Business> list=businessService.searchByPage(business);
+		model.addAttribute("list", list);
+		model.addAttribute("searchParam",business);
+		return "/content/businessList";
+	}
+	
 
 	/**
 	 * 删除商户
 	 */
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-	public String remove(@PathVariable("id") Long id) {
+	public String remove(@PathVariable("id") Long id,Model model) {
+		if(businessService.deletById(id)==1) {
+			model.addAttribute(PageCodeEnum.KEY, PageCodeEnum.REMOVE_SUCCESS);
+		}else {
+			model.addAttribute(PageCodeEnum.KEY,PageCodeEnum.REMOVE_FAIL);
+		}
 		return "redirect:/businesses";
 	}
 
@@ -81,8 +102,12 @@ public class BusinessesController {
 	 * 商户修改
 	 */
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-	public String modify(@PathVariable("id") Long id, BusinessDto dto) {
-		System.out.println(id);
-		return "/content/businessModify";
+	public String modify(@PathVariable("id") Long id, BusinessDto dto,Model model) {
+		if(businessService.modify(dto)==1) {
+			model.addAttribute(PageCodeEnum.KEY, PageCodeEnum.MODIFY_SUCCESS);
+		}else {
+			model.addAttribute(PageCodeEnum.KEY,PageCodeEnum.MODIFY_FAIL);
+		}
+		return "redirect:/businesses";
 	}
 }

@@ -41,9 +41,8 @@
 								<td width="30%">
 									<select name="city">
 										<c:forEach items="${cityList}" var="item">
-										<c:if test="${item.code == modifyObj.city}">selected="selected"</c:if>
-											<option value="${item.code}">${item.name}</option>
-										</c:forEach>
+										<option value="${item.code}" <c:if test="${item.code == modifyObj.city}">selected="selected"</c:if>>${item.name}</option>
+                                        </c:forEach>
 									</select>
 								</td>
 								<td align="right" width="10%">类别<font color="red">*</font>：</td>

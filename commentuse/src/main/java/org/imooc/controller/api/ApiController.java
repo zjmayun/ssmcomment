@@ -3,6 +3,7 @@ package org.imooc.controller.api;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.imooc.bean.Page;
 import org.imooc.constant.ApiCodeEnum;
@@ -79,7 +80,8 @@ public class ApiController {
 	 * 搜索结果页 - 搜索结果 - 三个参数
 	 */
 	@RequestMapping(value = "/search/{page.currentPage}/{city}/{category}/{keyword}", method = RequestMethod.GET)
-	public BusinessListDto searchByKeyword(BusinessDto businessDto) {
+	public BusinessListDto searchByKeyword(BusinessDto businessDto,HttpServletRequest request) {
+		System.out.println(request.getQueryString());
 		businessDto.getPage().setPageNumber(businessSearchNumber);
 		return businessService.searchByPageForApi(businessDto);
 	}

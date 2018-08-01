@@ -15,11 +15,11 @@
 		select id,name,subject,score from student where id=#{_parameter}
 	</select>
 	
-	<select id="selectByPage" parameterType="String" resultType="Student">
+	<select id="selectByPage" resultType="Student">
 		select id,name,subject,score from student
 		<where>
 			<if test="name != null and name != ''">
-				name like '%' #{_parameter} '%'
+				name like '%' #{name} '%'
 			</if>
 		</where>
 	</select>

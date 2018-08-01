@@ -4,8 +4,8 @@ function remove(id) {
 }
 
 function search() {
-	$("#mainForm").attr("method","GET");
-	$("#mainForm").attr("action",$("#basePath").val() + "/businesses");
+	$("#currentPage").val(currentPage);
+	alert("hello world");
 	$("#mainForm").submit();
 }
 
