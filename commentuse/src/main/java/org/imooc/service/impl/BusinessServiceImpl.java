@@ -112,6 +112,7 @@ public class BusinessServiceImpl implements BusinessService {
 		int i=businessDao.update(business);
 		return i;
 	}
+<<<<<<< HEAD
 
 
 
@@ -119,6 +120,8 @@ public class BusinessServiceImpl implements BusinessService {
 		List<Business> list=businessDao.selectByPage(business);
 		return list;
 	}
+=======
+>>>>>>> e3d42c8acb71e3ded5ab503596e3da5898053a8a
 	
 	
 	
