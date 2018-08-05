@@ -91,7 +91,7 @@
 		update business
 		<set>
 
-		    <if test="imgFileName != null">
+		   
 
 		
 		    <if test="img_file_name != null">
