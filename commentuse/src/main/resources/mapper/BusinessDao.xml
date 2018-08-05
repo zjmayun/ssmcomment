@@ -110,15 +110,14 @@
 			<if test="distance != null">
 				distance = #{distance},
 			</if>
-<<<<<<< HEAD
+
 			<if test="category != null">
 				category = #{category},
 			</if>
 			<if test="city != null">
 				city = #{city},
 			</if>
-=======
->>>>>>> e3d42c8acb71e3ded5ab503596e3da5898053a8a
+
 		</set>
 		where id=#{id}
 	</update>
