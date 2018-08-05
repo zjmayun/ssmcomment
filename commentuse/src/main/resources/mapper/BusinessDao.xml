@@ -90,12 +90,12 @@
 	<update id="update">
 		update business
 		<set>
-<<<<<<< HEAD
+
 		    <if test="imgFileName != null">
-=======
+
 		
 		    <if test="img_file_name != null">
->>>>>>> e3d42c8acb71e3ded5ab503596e3da5898053a8a
+
 				img_file_name = #{imgFileName},
 			</if>
 			<if test="title != null">
